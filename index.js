@@ -25,6 +25,10 @@ app.use(cors());
 const homeRoute = require("./routes/homeRoute");
 app.use("/", homeRoute);
 
+app.get('/', (req, res) => {
+  res.send("Hello From Server Side...");
+});
+
 const PORT = 8000;
 app.listen(PORT, () => {
   console.log("Listening");
