@@ -1,21 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const mongoose = require("mongoose");
-
-const portfolioSchema = new mongoose.Schema({
-  nickname: { type: String, required: true, unique: true },
-  css: { type: Object, required: false, unique: false },
-  links: { type: Object, required: true, unique: false },
-  photo: { type: String, required: true, unique: false },
-  fname: { type: String, required: true, unique: false },
-  lname: { type: String, required: true, unique: false },
-  bio: { type: String, required: false, unique: false },
-  visiblity: { type: String, required: true, unique: false },
-  projects: { type: Object, required: false, unique: false },
-});
-
-const PortfolioModel = mongoose.model(`portfolio`, portfolioSchema);
+const PortfolioModel = require("../models/PortfolioModel");
 
 async function findPortData(id) {
   return await PortfolioModel.find({ nickname: id });
@@ -45,7 +31,7 @@ async function createPortData(data) {
 }
 
 async function getAllPortfolios() {
-  return await PortfolioModel.find({visiblity: "public"});
+  return await PortfolioModel.find({ visiblity: "public" });
 }
 
 router.get("/:id", async (req, res) => {
@@ -74,6 +60,8 @@ router.get("/:id", async (req, res) => {
       photo: photo,
       fname: fname,
       lname: lname,
+      followers: {},
+      following: {},
       bio: "--",
       visiblity: "public",
       projects: {},

@@ -1,30 +1,18 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
-const dotenv = require("dotenv");
-
-dotenv.config({ path: "./.env" });
-
-const url = process.env.CONNECTION_URL;
-
-mongoose
-  .connect(url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("Connected to db..."))
-  .catch((err) => console.log("Error", err));
+const { mongodbConnect } = require("./connection");
 
 const app = express();
+mongodbConnect();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use(cors());
 
+const followersRoute = require("./routes/followersRoute");
 const homeRoute = require("./routes/homeRoute");
-app.use("/", homeRoute);
 
+app.use("/", followersRoute);
 app.use("/", homeRoute);
 
 const PORT = 8000;
