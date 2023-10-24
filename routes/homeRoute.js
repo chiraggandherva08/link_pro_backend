@@ -43,6 +43,10 @@ async function createPortData(id, data) {
   }
 }
 
+async function getAllPortfolios() {
+  return await PortfolioModel.find({});
+}
+
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
 
@@ -84,6 +88,10 @@ router.get("/:id", async (req, res) => {
     id: result,
   });
 });
+
+router.get('/', async (req, res) => {
+  return res.json(await getAllPortfolios());
+})
 
 router.post("/:id", async (req, res) => {
   const id = req.params.id;
