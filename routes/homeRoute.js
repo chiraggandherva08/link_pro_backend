@@ -11,6 +11,7 @@ const portfolioSchema = new mongoose.Schema({
   fname: { type: String, required: true, unique: false },
   lname: { type: String, required: true, unique: false },
   bio: { type: String, required: false, unique: false },
+  visiblity: { type: String, required: true, unique: false },
   projects: { type: Object, required: false, unique: false },
 });
 
@@ -20,7 +21,9 @@ async function findPortData(id) {
   return await PortfolioModel.find({ nickname: id });
 }
 
-async function updatePortData(id, data) {
+async function updatePortData(data) {
+  console.log(data);
+
   const result = await PortfolioModel.updateOne(
     { nickname: data.nickname },
     { $set: data }
@@ -33,7 +36,7 @@ async function updatePortData(id, data) {
   }
 }
 
-async function createPortData(id, data) {
+async function createPortData(data) {
   const result = await PortfolioModel.create(data);
 
   if (result.length === 1) {
@@ -44,7 +47,7 @@ async function createPortData(id, data) {
 }
 
 async function getAllPortfolios() {
-  return await PortfolioModel.find({});
+  return await PortfolioModel.find({visiblity: "public"});
 }
 
 router.get("/:id", async (req, res) => {
@@ -64,7 +67,7 @@ router.get("/:id", async (req, res) => {
       return res.json({ id: [] });
     }
 
-    await createPortData(id, {
+    await createPortData({
       nickname: nickname,
       css: {},
       links: {
@@ -74,6 +77,7 @@ router.get("/:id", async (req, res) => {
       fname: fname,
       lname: lname,
       bio: "--",
+      visiblity: "public",
       projects: {},
     });
 
@@ -97,7 +101,7 @@ router.post("/:id", async (req, res) => {
   const id = req.params.id;
   const reqdata = req.body.data;
 
-  const resp = await updatePortData(id, reqdata);
+  const resp = await updatePortData(reqdata);
 
   return res.json({
     response: resp,
