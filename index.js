@@ -25,7 +25,7 @@ app.use(cors());
 const homeRoute = require("./routes/homeRoute");
 app.use("/", homeRoute);
 
-app.use('/', homeRoute);
+app.use("/", homeRoute);
 
 const PORT = 8000;
 app.listen(PORT, () => {
