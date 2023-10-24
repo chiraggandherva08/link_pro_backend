@@ -22,8 +22,6 @@ async function findPortData(id) {
 }
 
 async function updatePortData(data) {
-  console.log(data);
-
   const result = await PortfolioModel.updateOne(
     { nickname: data.nickname },
     { $set: data }
