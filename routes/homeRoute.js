@@ -10,6 +10,7 @@ const portfolioSchema = new mongoose.Schema({
   photo: { type: String, required: true, unique: false },
   fname: { type: String, required: true, unique: false },
   lname: { type: String, required: true, unique: false },
+  bio: { type: String, required: false, unique: false },
   projects: { type: Object, required: false, unique: false },
 });
 
@@ -68,6 +69,7 @@ router.get("/:id", async (req, res) => {
       photo: photo,
       fname: fname,
       lname: lname,
+      bio: "--",
       projects: {},
     });
 
