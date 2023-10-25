@@ -9,10 +9,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-const followersRoute = require("./routes/followersRoute");
+const connectionRoute = require("./routes/connectionsRoute");
 const homeRoute = require("./routes/homeRoute");
 
-app.use("/", followersRoute);
+app.use("/", connectionRoute);
 app.use("/", homeRoute);
 
 const PORT = 8000;

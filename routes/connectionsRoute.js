@@ -4,18 +4,21 @@ const router = express.Router();
 
 const PortfolioModel = require("../models/PortfolioModel");
 
-async function findFollowers(nickname) {
+async function findConnectionsFollowers(nickname) {
   return await PortfolioModel.find({ nickname: nickname });
 }
 
-router.get("/followers", async (req, res) => {
+router.get("/connections", async (req, res) => {
   const { nickname } = req.query;
-  const allfollowers = await findFollowers(nickname);
+  const allfollowers = await findConnectionsFollowers(nickname);
 
   if (allfollowers.length === 0) {
     res.json({});
   } else {
-    res.json(allfollowers[0].followers);
+    res.json({
+      followers : allfollowers[0].followers,
+      following : allfollowers[0].following
+    });
   }
 });
 
