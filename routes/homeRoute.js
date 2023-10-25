@@ -88,7 +88,6 @@ router.post("/:id", async (req, res) => {
   const reqdata = req.body.data;
 
   const resp = await updatePortData(reqdata);
-
   return res.json({
     response: resp,
   });
