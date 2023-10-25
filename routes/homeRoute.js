@@ -8,6 +8,10 @@ async function findPortData(id) {
 }
 
 async function updatePortData(data) {
+  if (data === undefined) {
+    return;
+  }
+
   const result = await PortfolioModel.updateOne(
     { nickname: data.nickname },
     { $set: data }
@@ -84,10 +88,10 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/:id", async (req, res) => {
-  const id = req.params.id;
   const reqdata = req.body.data;
 
   const resp = await updatePortData(reqdata);
+
   return res.json({
     response: resp,
   });
