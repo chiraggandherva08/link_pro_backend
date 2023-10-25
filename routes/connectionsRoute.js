@@ -9,6 +9,8 @@ async function findConnectionsFollowers(nickname) {
 }
 
 router.get("/connections", async (req, res) => {
+  console.log('GET /connections');
+  
   const { nickname } = req.query;
   const allfollowers = await findConnectionsFollowers(nickname);
 
