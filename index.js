@@ -11,7 +11,9 @@ app.use(cors());
 
 const connectionRoute = require("./routes/connectionsRoute");
 const homeRoute = require("./routes/homeRoute");
+const skillRoute = require("./routes/skillRoute");
 
+app.use("/", skillRoute);
 app.use("/", connectionRoute);
 app.use("/", homeRoute);
 

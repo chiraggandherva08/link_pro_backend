@@ -69,6 +69,8 @@ router.get("/:id", async (req, res) => {
       bio: "--",
       visiblity: "public",
       projects: {},
+      skills: [],
+      certificates: {},
     });
 
     const result = await findPortData(id);

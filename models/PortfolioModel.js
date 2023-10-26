@@ -12,6 +12,8 @@ const portfolioSchema = new mongoose.Schema({
   followers: { type: Object, required: true, unique: false },
   following: { type: Object, required: true, unique: false },
   projects: { type: Object, required: false, unique: false },
+  skills: { type: Array, required: false, unique: false },
+  certificates: { type: Object, required: false, unique: false },
 });
 
 const PortfolioModel = mongoose.model(`portfolio`, portfolioSchema);
